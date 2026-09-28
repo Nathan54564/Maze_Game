@@ -1,0 +1,130 @@
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=: =
+CIS 1200 Game Project README
+PennKey: _______
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=: =
+
+================== =
+=: Core Concepts : =
+================== =
+
+- List the four core concepts, the features they implement, and why each feature
+  is an appropriate use of the concept. Incorporate the feedback you got after
+  submitting your proposal.
+
+  1. 2D Arrays - The maze layout is represented using a 2D array "String[][] maze" in the
+  "NathanMazeGenerator" class. This array stores the structure of the maze,
+  where each cell can be a wall '#', or a path '.' This is appropriate because a 2D
+  array is ideal for modeling the maze grid, which makes it easy to access and modify
+  each cell's state. It simplifies maze generation and collision detection.
+
+  2. Collections - Game objects like blocks, enemies, deathblocks, saveblocks, and winblocks
+  are stored in 'ArrayList' collections within the "NathanDisplay" class. For cis1200,
+  'ArrayList<NathanBlock> blocks' holds all the wall blocks in the game. This is appropriate
+  because it allows for the dynamic management of game objects, allowing for easy
+  addition, removal and iteration of these objects.
+
+  3. Inheritance and Subtyping - A base class 'NathanSprite' defines common attributes and
+  methods for all game entities. Subclasses like 'NathanPlayer', 'NathanBlock', 'NathanEnemy',
+  'NathanDeathblock', 'NathanWinblock', and 'NathanSaveblock' extend 'NathanSprite',
+  inheriting its properties while adding behaviors. This is appropriate because
+  Inheritance allows code reuse and clear structure. By defining shared characteristics
+  in 'NathanSprite', subclasses can focus on their unique functionalities.
+
+  4. JUnit Testing - The 'GameTest' class contains multiple JUnit tests that verify the
+  functionality of game components, including player movement, enemy behavior, block dimensions,
+  collision detection, and maze generation. This is appropriate because Unit testing
+  ensures that individual components function correctly and help identify bugs.
+
+============================== =
+=: File Structure Screenshot : =
+============================== =
+- Include a screenshot of your project's file structure. This should include
+  all of the files in your project, and the folders they are in. You can
+  upload this screenshot in your homework submission to gradescope, named
+  "file_structure.png".
+
+======================== =
+=: Your Implementation : =
+======================== =
+
+
+**Class Overviews:**
+
+- **Game:**
+  The entry point of the game. It sets up the main game window, initializes the card
+  layout for switching between the instructions screen and the game screen, and manages
+  the transition between different game states.
+
+- **NathanDisplay:**
+  Extends `JPanel` and handles the core game logic and rendering. It manages game objects,
+  handles user input, updates game state, and renders all visual elements, including the
+  player, blocks, enemies, and win conditions.
+
+- **NathanPlayer:**
+  Represents the player character. Handles player movement, collision detection with
+  other sprites, and respawning at activated saveblocks upon death.
+
+- **NathanBlock:**
+  Represents static wall blocks within the maze. These blocks are impassable barriers
+  that the player and enemies must navigate around.
+
+- **NathanEnemy:**
+  Represents enemy characters that move within the maze. Handles enemy movement
+  patterns, collision detection, and direction changes upon hitting obstacles.
+
+- **NathanDeathblock:**
+  Represents hazardous areas that can kill the player upon contact. Some deathblocks
+  are "trick" blocks that blink, adding an element of timing to avoid them.
+
+- **NathanSaveblock:**
+  Represents savepoints within the maze. When the player reaches a saveblock, it
+  becomes activated, setting a respawn point in case of the player's death.
+
+- **NathanWinblock:**
+  Represents the goal area of the maze. Reaching the winblock triggers the end
+  screen, displaying the player's statistics.
+
+- **NathanInstructionsScreen:**
+  Provides the game instructions and a button to start the game. It explains the
+  objective, controls, and various game elements to the player.
+
+- **NathanMazeGenerator:**
+  Handles the generation of the maze layout using a randomized depth-first search
+  algorithm. It populates the 2D maze array with walls and paths, ensuring a solvable
+  maze structure.
+
+- **NathanSprite:**
+  The abstract base class for all game entities. Defines common properties such as
+  position, size, color, and visibility, as well as methods for rendering and
+  collision detection.
+
+**Significant Stumbling Blocks:**
+
+One of the main challenges encountered was implementing the dynamic behavior of
+"trick" deathblocks that blink on and off. Ensuring that these deathblocks correctly
+toggle their visibility based on timing required careful management of game state and
+synchronization with the game loop. Also, handling collision detection
+accurately between the player, enemies, and other blocks necessitated thorough
+testing to prevent unexpected behaviors.
+
+**Design Evaluation:**
+
+The game's design shows a clear separation of concerns. Each class is
+responsible for a specific aspect of the game, such as rendering, input handling,
+or game logic. Private state is well-encapsulated within classes, preventing
+unintended external modifications and promoting modularity. For cis1200, the
+`NathanPlayer` class manages its own position and movement without exposing
+these details directly to other classes.
+
+If given the chance to refactor, one improvement I could do would be to enhance the collision
+detection system to be more scalable and efficient, possibly by implementing spatial
+partitioning techniques. Additionally, integrating more advanced design patterns,
+such as the Observer pattern for game state changes, could further decouple
+components and facilitate easier maintenance and feature expansion.
+
+======================= =
+=: External Resources : =
+======================= =
+
+- Cite any external resources (images, tutorials, etc.) that you may have used
+  while implementing your game.
